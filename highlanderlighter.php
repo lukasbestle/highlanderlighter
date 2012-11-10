@@ -1,7 +1,7 @@
 <?php
 class HighlanderLighter {
 	private $available = array(
-		"foreground" => array(
+		"f" => array(
 			"bold"         => "1",
 			"dim"          => "2",
 			"black"        => "0;30",
@@ -21,7 +21,7 @@ class HighlanderLighter {
 			"light_gray"   => "0;37",
 			"white"        => "1;37"
 		),
-		"background" => array(
+		"b" => array(
 			"black"        => "40",
 			"red"          => "41",
 			"green"        => "42",
@@ -31,8 +31,8 @@ class HighlanderLighter {
 			"cyan"         => "46",
 			"light_gray"   => "47"
 		),
-		"effects" => array(
 			"underline" => "4",
+		"e" => array(
 			"blink"     => "5",
 			"reverse"   => "7",
 			"hidden"    => "8",
@@ -48,18 +48,10 @@ class HighlanderLighter {
 	}
 	
 	private function match($hit) {
-		switch($hit[1]) {
-			case "f";
-				$use = $this->available["foreground"];
-				break;
-			case "b";
-				$use = $this->available["background"];
-				break;
-			case "e";
-				$use = $this->available["effects"];
-				break;
-			default;
-				$use = $this->available["default"];
+		if(isset($this->available[$hit[1]])) {
+			$use = $this->available[$hit[1]];
+		} else {
+			$use = $this->available["default"];
 		}
 		
 		$return = "";
