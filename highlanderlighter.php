@@ -4,6 +4,7 @@ class HighlanderLighter {
 		"f" => array(
 			"bold"         => "1",
 			"dim"          => "2",
+			"underline"    => "4",
 			"black"        => "0;30",
 			"dark_gray"    => "1;30",
 			"blue"         => "0;34",
@@ -31,7 +32,6 @@ class HighlanderLighter {
 			"cyan"         => "46",
 			"light_gray"   => "47"
 		),
-			"underline" => "4",
 		"e" => array(
 			"blink"     => "5",
 			"reverse"   => "7",
