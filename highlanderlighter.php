@@ -44,7 +44,15 @@ class HighlanderLighter {
 	);
 	
 	public function put($text) {
-		echo preg_replace_callback('/#(.?){(.*?)}/', array($this, 'match'), $text) . "\033[0m";
+		echo $this->parser($text);
+	}
+	
+	public function render($text) {
+		return $this->parser($text);
+	}
+	
+	private function parser($text) {
+		return preg_replace_callback('/#(.?){(.*?)}/', array($this, 'match'), $text) . "\033[0m";
 	}
 	
 	private function match($hit) {
