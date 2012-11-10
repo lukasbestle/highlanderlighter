@@ -43,6 +43,12 @@ class HighlanderLighter {
 		)
 	);
 	
+	private $commandChar = "#";
+	
+	public function __construct($commandChar="#") {
+		$this->commandChar = $commandChar;
+	}
+	
 	public function put($text) {
 		echo $this->parser($text);
 	}
@@ -52,7 +58,7 @@ class HighlanderLighter {
 	}
 	
 	private function parser($text) {
-		return preg_replace_callback('/#(.?){(.*?)}/', array($this, 'match'), $text) . "\033[0m";
+		return preg_replace_callback('/' . $this->commandChar . '(.?){(.*?)}/', array($this, 'match'), $text) . "\033[0m";
 	}
 	
 	private function match($hit) {
