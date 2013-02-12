@@ -1,4 +1,4 @@
-# HighlanderLighter
+# HighlanderLighter [![Build Status](https://travis-ci.org/vis7mac/highlanderlighter.png)](https://travis-ci.org/vis7mac/highlanderlighter)
 
 > A PHP command line text highlighter made for CLIs.
 
