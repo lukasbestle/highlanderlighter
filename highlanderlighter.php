@@ -58,24 +58,37 @@ class HighlanderLighter {
 	}
 	
 	private function parser($text) {
-		return preg_replace_callback('/' . $this->commandChar . '(.?){(.*?)}/', array($this, 'match'), $text) . "\033[0m";
+		// The method $this->match()
+		$method = array($this, 'match');
+		
+		// Match the portions of options (all the magic!) using $this->match()
+		$matched = preg_replace_callback('/' . $this->commandChar . '(.?){(.*?)}/', $method, $text);
+		
+		// Normalize again
+		return $matched . "\033[0m";
 	}
 	
 	private function match($hit) {
-		if(isset($this->available[$hit[1]])) {
-			$use = $this->available[$hit[1]];
+		$typeName = $hit[1];
+		$options = explode(";", $hit[2]);
+		
+		// Get the correct category
+		if(isset($this->available[$typeName])) {
+			$type = $this->available[$typeName];
 		} else {
-			$use = $this->available["default"];
+			$type = $this->available["default"];
 		}
 		
 		$return = "";
-		foreach(explode(";", $hit[2]) as $option) {
-			if(!isset($use[$option])) continue;
+		foreach($options as $option) {
+			// No valid option?
+			if(!isset($type[$option])) continue;
 			
-			if(substr($use[$option], 0, 1) == "\\") {
-				$return .= $use[$option];
+			if(substr($type[$option], 0, 1) == "\\") {
+				// Already a symbol, no need to put it into the syntax for highlighting (used for the beep, for example)
+				$return .= $type[$option];
 			} else {
-				$return .= "\033[" . $use[$option] . "m";
+				$return .= "\033[" . $type[$option] . "m";
 			}
 		}
 		return $return;
