@@ -1,4 +1,17 @@
 <?php
+
+/**
+ * highlanderlighter.php
+ * A PHP command line text highlighter made for CLIs.
+ *
+ * @version 1.0
+ * @author Lukas Bestle <lukas@lu-x.me>
+ * @link http://lu-x.me/
+ * @copyright Copyright 2013 Lukas Bestle
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @package HighlanderLighter
+ */
+
 class HighlanderLighter {
 	private $available = array(
 		"f" => array(
